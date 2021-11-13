@@ -1,0 +1,5 @@
+{
+  "Head":"Firm,Cusip,CusipOld,Symbol,SymbolOld,ShortDescription,ShortDescriptionOld,ISIN,ExpirationDate,ProcessDate,ToMarket,FromMarket,CountryCode,CountryCodeOld,StockFactor,CashFactor,PayableDate,SettlementDate,LastChangeDate,CorporateAction,CorporateActionMessage,RecordDate",
+  "ChangeRule": {},
+  "Delimiter": "|"
+}

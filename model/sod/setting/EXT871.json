@@ -1,0 +1,33 @@
+{
+    "Head":"AccountNumber,ProcessDate,Firm,CorrespondentID,CorrespondentOfficeID,OfficeCode,RegisteredRepCode,AccountType,Symbol,CUSIP,TradeQuantity,SettleQuantity,CurrencyCode,SecurityTypeCode,Description,MarginEligibleCode,ClosingPrice,LastActivtyDate,LocLocation,LocMemo,OptionAmount,ConversionFactor,UnderlyingCusip,OptionSymbolRoot,OptionContractDate,StrikePrice,CallPut,ExpirationDeliveryDate",
+    "ChangeRules": {
+        "AccountNumber": "AccountNumber",
+        "ProcessDate": "ProcessDate",
+        "Firm": "Firm",
+        "CorrespondentID": "CorrespondentID",
+        "CorrespondentOfficeID": "CorrespondentOfficeID",
+        "OfficeCode": "OfficeCode",
+        "RegisteredRepCode": "RegisteredRepCode",
+        "AccountType": "AccountType",
+        "Symbol": "Symbol",
+        "CUSIP": "CUSIP",
+        "TradeQuantity": "TradeQuantity",
+        "SettleQuantity": "SettleQuantity",
+        "CurrencyCode": "CurrencyCode",
+        "SecurityTypeCode": "SecurityTypeCode",
+        "Description": "Description",
+        "MarginEligibleCode": "MarginEligibleCode",
+        "ClosingPrice": "ClosingPrice",
+        "LastActivtyDate": "LastActivtyDate",
+        "LocLocation": "LocLocation",
+        "LocMemo": "LocMemo",
+        "OptionAmount": "OptionAmount",
+        "ConversionFactor": "ConversionFactor",
+        "UnderlyingCusip": "UnderlyingCusip",
+        "OptionSymbolRoot": "OptionSymbolRoot",
+        "OptionContractDate": "OptionContractDate",
+        "StrikePrice": "StrikePrice",
+        "CallPut": "CallPut",
+        "ExpirationDeliveryDate": "ExpirationDeliveryDate"
+    }
+}

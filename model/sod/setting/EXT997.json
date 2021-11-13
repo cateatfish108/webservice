@@ -1,0 +1,16 @@
+{
+    "Head": "ProcessDate,OfficeCode,AccountNumber,GrossFundsAvailable,PendingTransfer,RecentDeposit,PendingDebitInterest,PendingDebitDividend,FullyPaidUnsettledBalance,NetFundsAvailable,AmountWithheld",
+    "ChangeRules": {
+        "ProcessDate": "ProcessDate",
+        "OfficeCode": "OfficeCode",
+        "AccountNumber": "AccountNumber",
+        "GrossFundsAvailable": "GrossFundsAvailable",
+        "PendingTransfer": "PendingTransfer",
+        "RecentDeposit": "RecentDeposit",
+        "PendingDebitInterest": "PendingDebitInterest",
+        "PendingDebitDividend": "PendingDebitDividend",
+        "FullyPaidUnsettledBalance": "FullyPaidUnsettledBalance",
+        "NetFundsAvailable": "NetFundsAvailable",
+        "AmountWithheld": "AmountWithheld"
+    }
+}

@@ -1,0 +1,4 @@
+{
+    "Head": "AccountNumber,CurrencyCode,AccountType,EntryDate,Cusip,SequenceNumber,LocLocation,LocMemo,TradeDate,Tradenumber,SettleDate,TradeSettleBasis,Trailer,Quantity,SecurityTypeCode,CertificateNumber,LocationFrom1,LocationFrom2,LocationTo1,LocationTo2,CertificateHeld,EnteredDate,SourceProgram,StatementIndicator,ActivityIndicator,CorrSeg,Override,PDOverride,MLPAdjustment,IRAIgnore,MergeEntryCode,HistoryEntryCode,EntryType,TerminalID,UserID,SegIndicator,IssueDate,CertificateShortDesc,SMAChangeAmount,SMAChangePrice,SMAChangeRate,ContraAccountNumber,ContraCurrencyCode,ContraAccountTypeCode,ReInvestmentAmount,ReInvestmentPrice,DTCNumberExp,DTCNumber,SequenceCusipNumber,SequenceEntryDate,ProcessDate",
+    "ChangeRules": {}
+}

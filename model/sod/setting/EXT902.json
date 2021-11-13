@@ -1,0 +1,18 @@
+{
+    "Head": "Symbol,MaintenanceLong,MaintenanceShort,InitialLong,InitialShort,DayTradeRequirementLong,DayTradeRequirementShort,UnderlierLessOOMPercent,UnderlierPercent,UncoveredOptionMin,Qualifier,Value,DateModified",
+    "ChangeRules": {
+        "Symbol": "Symbol",
+        "MaintenanceLong": "MaintenanceLong",
+        "MaintenanceShort": "MaintenanceShort",
+        "InitialLong": "InitialLong",
+        "InitialShort": "InitialShort",
+        "DayTradeRequirementLong": "DayTradeRequirementLong",
+        "DayTradeRequirementShort": "DayTradeRequirementShort",
+        "UnderlierLessOOMPercent": "UnderlierLessOOMPercent",
+        "UnderlierPercent": "UnderlierPercent",
+        "UncoveredOptionMin": "UncoveredOptionMin",
+        "Qualifier": "Qualifier",
+        "Value": "Value",
+        "DateModified": "DateModified"
+    }
+}

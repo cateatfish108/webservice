@@ -1,0 +1,13 @@
+{
+    "Head": "CallID,AccountNumber,AccountName,CallAmount,CallType,TradeDate,DueDate,RegTDate",
+    "ChangeRules": {
+        "CallID": "CallID",
+        "AccountNumber": "AccountNumber",
+        "AccountName": "AccountName",
+        "CallAmount": "CallAmount",
+        "CallType": "CallType",
+        "TradeDate": "TradeDate",
+        "DueDate": "DueDate",
+        "RegTDate": "RegTDate"
+    }
+}

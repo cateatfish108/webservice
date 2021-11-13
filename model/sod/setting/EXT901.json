@@ -1,0 +1,31 @@
+{
+    "Head": "AccountNumber,CorrespondentOfficeID,OfficeCode,AccountType,CurrencyCode,CurrencyCodeOffice,MoneyMarketCode,ProcessDate,Firm,BeginBalance,PriorBeginBalance,TradeBalance,TradeBalanceOffice,TradeBalanceCorrespondent,TradeBalanceFirm,SettleBalance,MarketBalance,TodayOpeningBalance,TodayCustOpenTDBalance,DividendCheckBalance,ActivityIndicator,LastActiveDate,FreeBalance,TradeCashBalance,ShortTradeBalance,ShortOptionReq,PendingDividendRec",
+    "ChangeRules": {
+        "AccountNumber": "AccountNumber",
+        "CorrespondentOfficeID": "CorrespondentOfficeID",
+        "OfficeCode": "OfficeCode",
+        "AccountType": "AccountType",
+        "CurrencyCode": "CurrencyCode",
+        "CurrencyCodeOffice": "CurrencyCodeOffice",
+        "MoneyMarketCode": "MoneyMarketCode",
+        "ProcessDate": "ProcessDate",
+        "Firm": "Firm",
+        "BeginBalance ": "BeginBalance ",
+        "PriorBeginBalance": "PriorBeginBalance",
+        "TradeBalance": "TradeBalance",
+        "TradeBalanceOffice ": "TradeBalanceOffice ",
+        "TradeBalanceCorrespondent ": "TradeBalanceCorrespondent ",
+        "TradeBalanceFirm    ": "TradeBalanceFirm    ",
+        "SettleBalance": "SettleBalance",
+        "MarketBalance": "MarketBalance",
+        "TodayOpeningBalance": "TodayOpeningBalance",
+        "TodayCustOpenTDBalance": "TodayCustOpenTDBalance",
+        "DividendCheckBalance": "DividendCheckBalance",
+        "ActivityIndicator": "ActivityIndicator",
+        "LastActiveDate ": "LastActiveDate ",
+        "FreeBalance": "FreeBalance",
+        "TradeCashBalance": "TradeCashBalance",
+        "ShortTradeBalance": "ShortTradeBalance",
+        "ShortOptionReq": "ShortOptionReq"
+    }
+}

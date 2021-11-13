@@ -1,0 +1,9 @@
+{
+	"env":"dev",
+	"base_url":"http://172.19.81.78:8080/",
+	"host":"10.10.36.183",
+	"port":"8002",
+	"order_file_path":"application/file/",
+	"log_level":"debug",
+	"retry_order_cnt":5
+}

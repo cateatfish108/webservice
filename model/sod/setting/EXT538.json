@@ -1,0 +1,4 @@
+{
+    "Head": "AccountNumber,AccountName,RestrictReasonCode,OfficeCurrency,MarketValue,CashBalance,TotalEquity",
+    "ChangeRules": {}
+}

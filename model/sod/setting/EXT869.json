@@ -1,0 +1,4 @@
+{
+    "Head": "AccountNumber,AccountType,Amount,Description,CurrencyCode,ProcessDate,BatchCode,Cusip,EntryDate,SourceProgram,UserID,ActivityIndicator,OfficeCode,ACATSControlNumber,ActionCode,CheckNumber,ContraAccountNumber,ContraAccountTypeCode,ContraCurrencyCode,CorrWindowCode,CurrentPaydownFactor,DivTaxTypeCode,DTCNumber,DTCNumberExp,EffectiveDate,EnteredBy,EntryTypeCode,FeeIndicator,Firm,ForeignCode,FundsUserCode,GLPostStatusCode,HistoryEntryCode,InterestEffectiveDate,LastPaydownFactor,MDHIndicator,MergeEntryCode,MAgentIndicator,MoneyMarketCode,MutualFundPostIndicator,OriginalQuantity,OverrideIndicator,PasMergeEntryCode,PayTypeCode,Price,RecTypeCode,RegisteredRepCode,RRCategoryCode,SequenceNumber,SMAChangeAmount,StatementIndicator,StatusCode,TaxOverrideCode,TaxYear,TerminalID,ThirdPartyCode,TradeDate,Tradenumber,UserEntryDate,WireFundsCode,WithholdTaxIndicator,WithholdTaxTypeCode,CorrespondentOfficeID,CorrespondentID",
+    "ChangeRules": {}
+}

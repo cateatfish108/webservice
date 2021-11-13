@@ -1,0 +1,101 @@
+{
+  "ApexParam": {
+      "IP": "files.apexclearing.com",
+      "Port": "22",
+      "UserName": "lthr_uat",
+      "PrivateKeyLocation": "model/sod/setting/id_rsa",
+      "CorrespondentCode": "LTHR"
+  },
+  "Database":
+  {
+    "SetDatabase":"mysql",
+    "Oracle":{
+      "LinkParam":"system/myhexin@172.19.81.79:7070/orcloms"
+    },
+    "MySQL":{
+      "Host":"172.19.81.78",
+      "Port":8002,
+      "User":"root",
+      "Passwd":"OMS@10jqka",
+      "DB":"quickbroker",
+      "Charset":"utf8"
+    }
+  },
+  "SodDownload":
+  {
+    "DesPath":"files/sod/sod_origin/",
+    "OriPath":"./download/",
+    "FileNameAndFileType":
+    {
+      "EXT1027": "CSV",
+      "EXT235": "TXT",
+      "EXT236": "TXT",
+      "EXT1032": "CSV",
+      "EXT1035": "CSV",
+      "EXT1036": "CSV",
+      "EXT250": "CSV",
+      "EXT596": "TXT",
+      "EXT747": "CSV",
+      "EXT765": "TXT",
+      "EXT869": "CSV",
+      "EXT870": "CSV",
+      "EXT871": "CSV",
+      "EXT872": "CSV",
+      "EXT901": "CSV",
+      "EXT902": "CSV",
+      "EXT922": "CSV",
+      "EXT981": "CSV",
+      "EXT982": "CSV",
+      "EXT986": "CSV",
+      "EXT989": "CSV",
+      "EXT997": "CSV",
+      "EXT538": "CSV"
+    },
+    "ExtendFile":
+    {
+      "EXT871": "205386",
+      "EXT872": "205387"
+    }
+  },
+  "SodFormat":
+  {
+    "DesPath":"files/sod/sod_format/",
+    "OriPath":"files/sod/sod_origin/",
+    "ConfigPath":"model/sod/setting/",
+    "HaveHeadFiles":"EXT872,EXT922,EXT981,EXT982,EXT1032,EXT1035,EXT1036,EXT986,EXT922"
+  },
+  "SodTrans":
+  {
+    "DesPath":"files/sod/sod_import/",
+    "OriPath":"files/sod/sod_format/",
+    "ConfigPath":"model/sod/setting/csvconvert.xml"
+  },
+  "SodImport":
+  {
+    "OriPath":"files/sod/sod_import/",
+    "NotDeleteList":"EXT250"
+  },
+  "SodHqInit":
+  {
+    "BaseURL":"https://b2b-api.10jqka.com.cn/gateway/",
+    "TokenURL":"service-mana/app/login-appkey?",
+    "QueryURL":"arsenal/IFind-data/i/db/1/db_service?",
+    "appkey":"5F61F4730004",
+    "appSecret":"F6322D931B33E6F84B806E5487C859DE",
+    "UserName":"APP_LHAPP",
+    "PassWord":"APP_LHAPP_0E9D",
+    "ReqPerCnt":100
+  },
+  "CronJob":
+  {
+    "Func": "SodJob",
+    "Hour":10,
+    "Minute": 25
+  },
+  "CronJob_HqInit":
+  {
+    "Func": "HqInitJob",
+    "Hour":10,
+    "Minute": 25
+  }
+}

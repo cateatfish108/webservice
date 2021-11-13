@@ -1,0 +1,5 @@
+{
+  "Head":"AccountNumber,Firm,AccountName,TotalShareQuantity,OfficeName,OfficeCode,Cusip,Symbol,ShortDescription,ISIN,CorporateAction,CountryCode,RecordDate,ExpirationDate,ReorgCutOffDate,RedemptionDate,ProcessDate,LastChangeDate,CorporateActionMessage",
+  "ChangeRule": {},
+  "Delimiter": "|"
+}

@@ -1,0 +1,30 @@
+{
+    "ChangeRules": {
+        "AccountNumber": "AccountNumber",
+        "Firm": "Firm",
+        "OfficeCode": "OfficeCode",
+        "StrategyId": "StrategyId",
+        "StrategySequence": "StrategySequence",
+        "AccountType": "AccountType",
+        "CUSIP": "CUSIP",
+        "TradeQuantity": "TradeQuantity",
+        "Symbol": "Symbol",
+        "Description": "Description",
+        "ClosingPrice": "ClosingPrice",
+        "MarketValue": "MarketValue",
+        "SecurityTypeCode": "SecurityTypeCode",
+        "UnderlyingSymbol": "UnderlyingSymbol",
+        "StrikePrice": "StrikePrice",
+        "ISIN": "ISIN",
+        "Change": "Change",
+        "PositionType": "PositionType",
+        "ProcessDate": "ProcessDate",
+        "IsSelling": "IsSelling",
+        "MaintenanceRequirement": "MaintenanceRequirement",
+        "ConcentrationRequirement": "ConcentrationRequirement",
+        "OptionStrategy": "OptionStrategy",
+        "OptionLeg": "OptionLeg",
+        "StrategyMaintenanceRequirement": "StrategyMaintenanceRequirement",
+        "StrategyConcentrationRequirement": "StrategyConcentrationRequirement"
+    }
+}

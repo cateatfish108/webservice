@@ -1,0 +1,1016 @@
+<!-->
+<table>配置
+	dest_file 	生成的目标csv文件名
+	key 		当目标由多张表组成，key值为用于连接的列索引名称
+	convert_func_script	配置的convert_func所在的python脚本,不带py后缀
+
+	subtable 	对应的原始csv数据子集，需要和maintable通过key值左外连接
+	default 	当目标字段无法找到与之一对一的原始csv数据时，可进行convert_func转换或者直接取配置默认值
+	src_file 	原始csv数据文件名
+
+	main_table	为"true"时，为与目标csv数据一一对应的原始csv数据，为目标数据的全集
+	column_mapping	字段之间的对应关系标签
+	src_col 	原始csv数据中的列名
+	dest_col 	生成的目标csv数据中的列名
+	filter_value 需要筛选的值，入参为src_col值，若不配dest_col属性，则表示该字段只做筛选不做导出
+	need_translate	是否对目标字段做字符串遍历，
+	translate_config   对目标字段做字符串遍历，并且经过数据字典转换后做位或操作的配置，主要针对恒生熟悉为一个字符串，而快速柜台为按位或的整型的情况，default_value为其初始值，dictionary为数据字典
+	dictionary 	如果需要数据字典转换则配置数据字段名,入参为dest_col值
+	convert_func 		对于不能用数据字典一一对应的转换，调用convert_func函数进行转换，（HSxxxToQBxxx）
+	convert_func_param	调用convert_func函数的入参，当配置convert_func属性时，必须有convert_func_param属性，可为空，入参为dest_col中的值
+	default_value 	没有对应值时候的默认值
+	user_defined_func 自定义生成规则
+	user_defined_func_param 自定义入参
+</table>
+17242628320709
+<dictionary_list>
+	dictionary 	单个数据字典配置
+	name 		数据字典名
+	note		数据字典解释
+	my_id 		目标csv中的字典值
+	peer_id 	原始csv数据中的字典值
+</dictionary_list>
+
+<post_work>
+	主要用于费率的转换
+	post_work_scrip 后处理的python脚本,不带py后缀
+	func 后处理的python函数名
+</post_work>
+<-->
+<protocol>
+	<dictionary_list>
+		<dictionary name="ID_TYPE" note="证件类别">
+				<convert peer_id="0" my_id="0"/><!--护照-->
+				<convert peer_id="J" my_id="1"/><!--护照-->
+				<convert peer_id="3" my_id="2"/><!--军官证-->
+				<convert peer_id="E" my_id="3"/><!--士兵证-->
+				<convert peer_id="h" my_id="4"/><!--回乡证-->
+				<convert peer_id="F" my_id="5"/><!--户口本-->
+				<convert peer_id="1" my_id="6"/><!--外国护照-->
+				<convert peer_id="g" my_id="7"/><!--技术监督局代码-->
+				<convert peer_id="2" my_id="8"/><!--营业执照-->
+				<convert peer_id="7" my_id="9"/><!--行政机构-->
+				<convert peer_id="M" my_id="10"/><!--社会团体-->
+				<convert peer_id="C" my_id="11"/><!--军队-->
+				<convert peer_id="b" my_id="11"/><!--军队-->
+				<convert peer_id="D" my_id="12"/><!--武警-->
+				<convert peer_id="K" my_id="12"/><!--武警-->
+				<convert peer_id="L" my_id="12"/><!--武警-->
+				<convert peer_id="d" my_id="13"/><!--下属机构-->
+				<convert peer_id="f" my_id="14"/><!--基金会-->
+				<convert peer_id="H" my_id="15"/><!--台胞证-->
+				<convert peer_id="S" my_id="16"/><!--港澳台居民身份证-->
+				<convert peer_id="4" my_id="17"/><!--其他-->
+				<convert peer_id="9" my_id="17"/><!--其他-->
+				<convert peer_id="a" my_id="17"/><!--其他-->
+				<convert peer_id="c" my_id="17"/><!--其他-->
+				<convert peer_id="G" my_id="17"/><!--其他-->
+				<convert peer_id="I" my_id="17"/><!--其他-->
+				<convert peer_id="N" my_id="17"/><!--其他-->
+				<convert peer_id="P" my_id="17"/><!--其他-->
+				<convert peer_id="O" my_id="17"/><!--其他-->
+				<convert peer_id="Q" my_id="17"/><!--其他-->
+				<convert peer_id="R" my_id="17"/><!--其他-->
+				<convert peer_id="T" my_id="17"/><!--其他-->
+				<convert peer_id="X" my_id="17"/><!--其他-->
+				<convert peer_id="Y" my_id="17"/><!--其他-->
+		</dictionary>
+		<dictionary name="CLIENT_STATUS" note="客户状态">
+				<convert peer_id="0" my_id="0"/><!--正常-->
+				<convert peer_id="1" my_id="1"/><!--冻结-->
+				<convert peer_id="2" my_id="2"/><!--挂失-->
+				<convert peer_id="3" my_id="3"/><!--销户-->
+				<convert peer_id="5" my_id="10"/><!--其他-->
+				<convert peer_id="6" my_id="10"/><!--其他-->
+				<convert peer_id="7" my_id="10"/><!--其他-->
+				<convert peer_id="8" my_id="10"/><!--其他-->
+				<convert peer_id="9" my_id="10"/><!--其他-->
+				<convert peer_id="A" my_id="10"/><!--其他-->
+				<convert peer_id="B" my_id="10"/><!--其他-->
+				<convert peer_id="C" my_id="10"/><!--其他-->
+				<convert peer_id="D" my_id="10"/><!--其他-->
+				<convert peer_id="F" my_id="10"/><!--其他-->
+				<convert peer_id="H" my_id="10"/><!--其他-->
+				<convert peer_id="I" my_id="10"/><!--其他-->
+				<convert peer_id="G" my_id="10"/><!--其他-->
+				<convert peer_id="E" my_id="10"/><!--其他-->
+				<convert peer_id="J" my_id="10"/><!--其他-->
+				<convert peer_id="K" my_id="10"/><!--其他-->
+		</dictionary>
+		
+		<dictionary  name="ACCOUNT_STATUS" note="账户状态">
+			<convert peer_id="0" my_id="0"/><!--正常-->
+			<convert peer_id="1" my_id="1"/><!--冻结-->
+			<convert peer_id="2" my_id="2"/><!--挂失-->
+			<convert peer_id="3" my_id="3"/><!--销户-->
+			<convert peer_id="4" my_id="10"/><!--其他-->
+			<convert peer_id="5" my_id="10"/><!--其他-->
+			<convert peer_id="6" my_id="10"/><!--其他-->
+			<convert peer_id="7" my_id="10"/><!--其他-->
+			<convert peer_id="8" my_id="10"/><!--其他-->
+			<convert peer_id="9" my_id="10"/><!--其他-->
+			<convert peer_id="A" my_id="10"/><!--其他-->
+			<convert peer_id="B" my_id="10"/><!--其他-->
+			<convert peer_id="C" my_id="10"/><!--其他-->
+			<convert peer_id="D" my_id="10"/><!--其他-->
+			<convert peer_id="F" my_id="10"/><!--其他-->
+			<convert peer_id="G" my_id="10"/><!--其他-->
+			<convert peer_id="H" my_id="10"/><!--其他-->
+			<convert peer_id="I" my_id="10"/><!--其他-->
+			<convert peer_id="E" my_id="10"/><!--其他-->
+			<convert peer_id="J" my_id="10"/><!--其他-->
+			<convert peer_id="K" my_id="10"/><!--其他-->
+		</dictionary>
+		
+		<dictionary  name="CURRENCY_CODE" note="币种">
+			<convert peer_id="0" my_id="CNY"/><!--人民币-->
+			<convert peer_id="1" my_id="USD"/><!--美元-->
+			<convert peer_id="2" my_id="HKD"/><!--港币-->
+		</dictionary>
+		
+		<dictionary  name="MARKET_CODE" note="交易所代码">
+			<convert peer_id="1" my_id="SH"/><!--上海-->
+			<convert peer_id="2" my_id="SZ"/><!--深圳-->
+			<convert peer_id="NMS" my_id="NQ"/><!--美国-->
+			<convert peer_id="NYSE" my_id="NY"/><!--纽约证券交易所-->
+			<convert peer_id="AMEX" my_id="NY"/><!--美国证券交易所-->
+		</dictionary>
+		
+		<dictionary  name="STKACC_STATUS" note="股东状态">
+				<convert peer_id="0" my_id="0"/><!--正常-->
+				<convert peer_id="1" my_id="1"/><!--冻结-->
+				<convert peer_id="2" my_id="2"/><!--挂失-->
+				<convert peer_id="6" my_id="12"/><!--VIP状态-->
+				<convert peer_id="3" my_id="13"/><!--其他-->
+				<convert peer_id="4" my_id="13"/><!--其他-->
+				<convert peer_id="5" my_id="13"/><!--其他-->
+				<convert peer_id="7" my_id="13"/><!--其他-->
+				<convert peer_id="8" my_id="13"/><!--其他-->
+				<convert peer_id="9" my_id="13"/><!--其他-->
+				<convert peer_id="A" my_id="13"/><!--其他-->
+				<convert peer_id="B" my_id="13"/><!--其他-->
+				<convert peer_id="C" my_id="13"/><!--其他-->
+				<convert peer_id="D" my_id="13"/><!--其他-->
+				<convert peer_id="F" my_id="13"/><!--其他-->
+				<convert peer_id="H" my_id="13"/><!--其他-->
+				<convert peer_id="I" my_id="13"/><!--其他-->
+				<convert peer_id="K" my_id="13"/><!--其他-->
+				<convert peer_id="E" my_id="13"/><!--其他-->
+				<convert peer_id="J" my_id="13"/><!--其他-->
+				<convert peer_id="G" my_id="13"/><!--其他-->
+		</dictionary>
+		
+		<dictionary name="STOCK_TYPE" note="证券类别">
+			<convert peer_id="A"  my_id="S0"/><!--股票-->
+			<convert peer_id="B"  my_id="S0"/><!--优先股票-->
+			<convert peer_id="C"  my_id="FD"/><!--基金-->
+			<convert peer_id="F"  my_id="S0"/><!--其他股票-->
+			<convert peer_id="G"  my_id="FD"/><!--信托基金-->
+			<convert peer_id="H"  my_id="FD"/><!--非信托基金-->
+		</dictionary>
+		
+		<dictionary name="ENTRUST_WAY" note="委托方式">
+			<convert peer_id="1" my_id="1"/><!--电话-->
+			<convert peer_id="3" my_id="16"/><!--远程-->
+			<convert peer_id="4" my_id="8"/><!--柜台-->
+			<convert peer_id="8" my_id="64"/><!--手机-->
+			<convert peer_id="7" my_id="32"/><!--网上委托-->
+			<convert peer_id="9" my_id="32"/><!--网上委托-->
+			<convert peer_id="0" my_id="32"/><!--网上委托-->
+			<convert peer_id="2" my_id="32"/><!--网上委托-->
+			<convert peer_id="5" my_id="32"/><!--网上委托-->
+			<convert peer_id="6" my_id="32"/><!--网上委托-->
+			<convert peer_id="7" my_id="32"/><!--网上委托-->
+			<convert peer_id="9" my_id="32"/><!--网上委托-->
+			<convert peer_id="a" my_id="32"/><!--网上委托-->
+			<convert peer_id="b" my_id="32"/><!--网上委托-->
+			<convert peer_id="c" my_id="32"/><!--网上委托-->
+			<convert peer_id="d" my_id="32"/><!--网上委托-->
+			<convert peer_id="e" my_id="32"/><!--网上委托-->
+			<convert peer_id="g" my_id="32"/><!--网上委托-->
+			<convert peer_id="h" my_id="32"/><!--网上委托-->
+			<convert peer_id="i" my_id="32"/><!--网上委托-->
+			<convert peer_id="m" my_id="32"/><!--网上委托-->
+			<convert peer_id="p" my_id="32"/><!--网上委托-->
+			<convert peer_id="r" my_id="32"/><!--网上委托-->
+			<convert peer_id="s" my_id="32"/><!--网上委托-->
+			<convert peer_id="t" my_id="32"/><!--网上委托-->
+			<convert peer_id="u" my_id="32"/><!--网上委托-->
+			<convert peer_id="v" my_id="32"/><!--网上委托-->
+			<convert peer_id="x" my_id="32"/><!--网上委托-->
+			<convert peer_id="y" my_id="32"/><!--网上委托-->
+			<convert peer_id="z" my_id="32"/><!--网上委托-->
+			<convert peer_id="A" my_id="32"/><!--网上委托-->
+			<convert peer_id="B" my_id="32"/><!--网上委托-->
+			<convert peer_id="C" my_id="32"/><!--网上委托-->
+			<convert peer_id="D" my_id="32"/><!--网上委托-->
+			<convert peer_id="E" my_id="32"/><!--网上委托-->
+			<convert peer_id="F" my_id="32"/><!--网上委托-->
+			<convert peer_id="G" my_id="32"/><!--网上委托-->
+			<convert peer_id="H" my_id="32"/><!--网上委托-->
+			<convert peer_id="I" my_id="32"/><!--网上委托-->
+			<convert peer_id="J" my_id="32"/><!--网上委托-->
+			<convert peer_id="K" my_id="32"/><!--网上委托-->
+			<convert peer_id="L" my_id="32"/><!--网上委托-->
+			<convert peer_id="N" my_id="32"/><!--网上委托-->
+			<convert peer_id="O" my_id="32"/><!--网上委托-->
+			<convert peer_id="P" my_id="32"/><!--网上委托-->
+			<convert peer_id="Q" my_id="32"/><!--网上委托-->
+			<convert peer_id="R" my_id="32"/><!--网上委托-->
+			<convert peer_id="S" my_id="32"/><!--网上委托-->
+			<convert peer_id="T" my_id="32"/><!--网上委托-->
+			<convert peer_id="U" my_id="32"/><!--网上委托-->
+			<convert peer_id="Y" my_id="32"/><!--网上委托-->
+			<convert peer_id="Z" my_id="32"/><!--网上委托-->
+			<convert peer_id="~" my_id="32"/><!--网上委托-->
+			<convert peer_id="+" my_id="32"/><!--网上委托-->
+			<convert peer_id="-" my_id="32"/><!--网上委托-->
+			<convert peer_id="#" my_id="32"/><!--网上委托-->
+		</dictionary>
+		
+		<dictionary name="REPORT_RESULT" note="申报结果">
+			<convert peer_id="0"  my_id="0"/><!--未报-->
+			<convert peer_id="1"  my_id="0"/><!--未报-->
+			<convert peer_id="B"  my_id="0"/><!--未报-->
+			<convert peer_id="C"  my_id="1"/><!--正报-->
+			<convert peer_id="2"  my_id="2"/><!--已报-->
+			<convert peer_id="3"  my_id="2"/><!--已报-->
+			<convert peer_id="9"  my_id="3"/><!--废单-->
+			<convert peer_id="7"  my_id="5"/><!--部分成交-->
+			<convert peer_id="8"  my_id="6"/><!--成交-->
+			<convert peer_id="4"  my_id="7"/><!--部成部撤-->
+			<convert peer_id="6"  my_id="8"/><!--全部撤单-->
+			<convert peer_id="D"  my_id="9"/><!--撤单未成-->
+		</dictionary>
+		
+		<dictionary name="CANCEL_FLAG" note="撤单标志">
+			<convert peer_id="0" my_id="O"/><!--委托-->
+			<convert peer_id="2" my_id="W"/><!--撤单-->
+		</dictionary>
+
+		<dictionary name="BRANCH_TYPE" note="机构类型">
+			<convert peer_id="4" my_id="3"/><!--营业部-->
+			<convert peer_id="1" my_id="2"/><!--管理机构-->
+			<convert peer_id="2" my_id="4"/><!--产品机构-->
+			<convert peer_id="3" my_id="4"/><!--专门机构-->
+		</dictionary>
+
+		<dictionary name="RESULT_EXPLAIN" note="申报结果说明">
+			<convert peer_id="0"  my_id="未申报"/><!--未报-->
+			<convert peer_id="1"  my_id="未申报"/><!--未报-->
+			<convert peer_id="B"  my_id="未申报"/><!--未报-->
+			<convert peer_id="C"  my_id="正在申报"/><!--正报-->
+			<convert peer_id="2"  my_id="已申报"/><!--已报-->
+			<convert peer_id="3"  my_id="已申报"/><!--已报-->
+			<convert peer_id="9"  my_id="非法委托"/><!--废单-->
+			<convert peer_id="7"  my_id="部分成交"/><!--部分成交-->
+			<convert peer_id="8"  my_id="全部成交"/><!--成交-->
+			<convert peer_id="4"  my_id="部成部撤"/><!--部成部撤-->
+			<convert peer_id="6"  my_id="全部撤单"/><!--全部撤单-->
+			<convert peer_id="D"  my_id="撤单未成"/><!--撤单未成-->
+		</dictionary>
+
+		<dictionary name="TRADE_RIGHTS" note="交易权限">
+			<convert peer_id="j" my_id="64"/><!--创业板交易-->
+			<convert peer_id="g" my_id="16"/><!--权证交易-->
+		</dictionary>
+
+		<dictionary name="CLIENT_PROP" note="客户特殊限制">
+			<convert peer_id="M" my_id="8"/><!--禁止转托管-->
+			<convert peer_id="1" my_id="64"/><!--禁止买入-->
+			<convert peer_id="0" my_id="32"/><!--禁止销户-->
+			<convert peer_id="2" my_id="128"/><!--禁止卖出-->
+			<convert peer_id="3" my_id="16"/><!--禁撤销指定-->
+		</dictionary>
+
+		<dictionary name="ACC_CTL_PROP" note="特殊限制">
+			<convert peer_id="B" my_id="8"/><!--禁止卖出-->
+			<convert peer_id="C" my_id="64"/><!--禁撤销指定-->
+			<convert peer_id="A" my_id="4"/><!--禁止买入-->
+			<convert peer_id="E" my_id="128"/><!--禁止转托管-->
+		</dictionary>
+	</dictionary_list>
+
+	
+	<table dest_file="EXT250.csv"  convert_func_script="trans_func" key = "AccountNumber">
+		<subtable src_file="EXT250.csv" main_table="true">
+			<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>
+			<column_mapping src_col="AccountNumber" dest_col="Serial_No" user_defined_func="GetSerialNo" user_defined_func_param="AccountNumber"/>
+			<column_mapping src_col="CallID" dest_col="CallID" user_defined_func="DefaultNumber" user_defined_func_param="CallID" />
+			<column_mapping src_col="AccountName" dest_col="AccountName"/>
+			<column_mapping src_col="CallAmount" dest_col="CallAmount" user_defined_func="DeleteDollar" user_defined_func_param="CallAmount"/>
+			<column_mapping src_col="CallType" dest_col="CallType"/>
+			<column_mapping src_col="TradeDate" dest_col="TradeDate" user_defined_func="FormatDate" user_defined_func_param="TradeDate"/>
+			<column_mapping src_col="DueDate" dest_col="DueDate" user_defined_func="FormatDate" user_defined_func_param="DueDate" />
+			<column_mapping src_col="RegTDate" dest_col="RegTDate" user_defined_func="FormatDate" user_defined_func_param="RegTDate" />
+		</subtable>
+		<default>
+			<column_mapping dest_col="Business_Date" default_value="19700101" convert_func="GetTodayDate" convert_func_param="TradeDate" />
+		</default>
+	</table>
+
+	<!--<table dest_file="EXT538.csv"  convert_func_script="trans_func" key = "AccountNumber">-->
+		<!--<subtable src_file="EXT538.csv" main_table="true">-->
+			<!--<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>-->
+			<!--<column_mapping src_col="AccountName" dest_col="AccountName"/>-->
+			<!--<column_mapping src_col="RestrictReasonCode" dest_col="RestrictReasonCode"/>-->
+			<!--<column_mapping src_col="OfficeCurrency" dest_col="OfficeCurrency"/>-->
+			<!--<column_mapping src_col="MarketValue" dest_col="MarketValue"/>-->
+			<!--<column_mapping src_col="CashBalance" dest_col="CashBalance"/>-->
+			<!--<column_mapping src_col="TotalEquity" dest_col="TotalEquity"/>-->
+		<!--</subtable>-->
+		<!--<default></default>-->
+	<!--</table>-->
+
+	<table dest_file="EXT747.csv"  convert_func_script="trans_func" key = "CUSIP">
+		<subtable src_file="EXT747.csv" main_table="true">
+			<column_mapping src_col="CUSIP" dest_col="CUSIP"/>
+			<column_mapping src_col="MarketSymbol" dest_col="MarketSymbol"/>
+			<column_mapping src_col="ShortDescription" dest_col="ShortDescription" user_defined_func="TrimSpecialChar" user_defined_func_param="ShortDescription" />
+			<column_mapping src_col="SecurityTypeCode" dest_col="SecurityTypeCode"/>
+			<column_mapping src_col="CmpQualCode" dest_col="CmpQualCode"/>
+			<column_mapping src_col="SecQualCode" dest_col="SecQualCode"/>
+			<column_mapping src_col="MarginEligibleCode" dest_col="MarginEligibleCode"/>
+			<column_mapping src_col="Margin100ReqCode" dest_col="Margin100ReqCode"/>
+			<column_mapping src_col="ForeignCode" dest_col="ForeignCode"/>
+			<column_mapping src_col="TradeNumberIntCode" dest_col="TradeNumberIntCode"/>
+			<column_mapping src_col="GsccStlCode" dest_col="GsccStlCode"/>
+			<column_mapping src_col="DTCEligbleCode" dest_col="DTCEligbleCode"/>
+			<column_mapping src_col="ListedMarketCode" dest_col="ListedMarketCode"/>
+			<column_mapping src_col="WhenIssuedCode" dest_col="WhenIssuedCode"/>
+			<column_mapping src_col="BookEntryCode" dest_col="BookEntryCode"/>
+			<column_mapping src_col="STATE" dest_col="STATE"/>
+			<column_mapping src_col="ReOrgCode" dest_col="ReOrgCode"/>
+			<column_mapping src_col="DefaultCode" dest_col="DefaultCode"/>
+			<column_mapping src_col="MarketMakerCode" dest_col="MarketMakerCode"/>
+			<column_mapping src_col="ResearchCode" dest_col="ResearchCode"/>
+			<column_mapping src_col="NASDTypeCode" dest_col="NASDTypeCode"/>
+			<column_mapping src_col="FundsSettlementCode" dest_col="FundsSettlementCode"/>
+			<column_mapping src_col="EuroClearCode" dest_col="EuroClearCode"/>
+			<column_mapping src_col="UserCode1" dest_col="UserCode1"/>
+			<column_mapping src_col="UserCode2" dest_col="UserCode2"/>
+			<column_mapping src_col="UserCode3" dest_col="UserCode3"/>
+			<column_mapping src_col="UserCode4" dest_col="UserCode4"/>
+			<column_mapping src_col="UserCode5" dest_col="UserCode5"/>
+			<column_mapping src_col="Product" dest_col="Product"/>
+			<column_mapping src_col="TaxCode" dest_col="TaxCode"/>
+			<column_mapping src_col="PreviousPrice" dest_col="PreviousPrice"/>
+			<column_mapping src_col="ClosingPrice" dest_col="ClosingPrice"/>
+			<column_mapping src_col="AlternateTransfer" dest_col="AlternateTransfer"/>
+			<column_mapping src_col="TransferAgent" dest_col="TransferAgent"/>
+			<column_mapping src_col="Description1" dest_col="Description1" user_defined_func="TrimSpecialChar" user_defined_func_param="Description1"/>
+			<column_mapping src_col="Description2" dest_col="Description2" user_defined_func="TrimSpecialChar" user_defined_func_param="Description2"/>
+			<column_mapping src_col="Description3" dest_col="Description3" user_defined_func="TrimSpecialChar" user_defined_func_param="Description3"/>
+			<column_mapping src_col="LastChangeDate" dest_col="LastChangeDate" user_defined_func="FormatDate" user_defined_func_param="LastChangeDate"/>
+			<column_mapping src_col="LastTradeDate" dest_col="LastTradeDate" user_defined_func="FormatDate" user_defined_func_param="LastTradeDate"/>
+			<column_mapping src_col="LastPriceDate" dest_col="LastPriceDate" user_defined_func="FormatDate" user_defined_func_param="LastPriceDate"/>
+			<column_mapping src_col="SICCode" dest_col="SICCode"/>
+			<column_mapping src_col="RegTRate" dest_col="RegTRate"/>
+			<column_mapping src_col="MaintentanceRate" dest_col="MaintentanceRate"/>
+			<column_mapping src_col="Maintenance100Price" dest_col="Maintenance100Price"/>
+			<column_mapping src_col="Fed100Price" dest_col="Fed100Price"/>
+			<column_mapping src_col="ForeignCountry" dest_col="ForeignCountry"/>
+			<column_mapping src_col="CMORemicIndicator" dest_col="CMORemicIndicator"/>
+			<column_mapping src_col="OldSecurityNumber" dest_col="OldSecurityNumber"/>
+			<column_mapping src_col="Label" dest_col="Label"/>
+			<column_mapping src_col="ConversionFactor" dest_col="ConversionFactor"/>
+			<column_mapping src_col="PayingAgent" dest_col="PayingAgent"/>
+			<column_mapping src_col="Insured" dest_col="Insured"/>
+			<column_mapping src_col="MBSCC_SBO_TFT" dest_col="MBSCC_SBO_TFT"/>
+			<column_mapping src_col="PriceTypeCode" dest_col="PriceTypeCode"/>
+			<column_mapping src_col="PTCEligibleCode" dest_col="PTCEligibleCode"/>
+			<column_mapping src_col="ShellCUSIPCode" dest_col="ShellCUSIPCode"/>
+			<column_mapping src_col="ExtMLPCode" dest_col="ExtMLPCode"/>
+			<column_mapping src_col="IssueCode" dest_col="IssueCode"/>
+			<column_mapping src_col="ElectronicFeedCode" dest_col="ElectronicFeedCode"/>
+			<column_mapping src_col="GSCCEligibleCode" dest_col="GSCCEligibleCode"/>
+			<column_mapping src_col="Routing" dest_col="Routing"/>
+			<column_mapping src_col="UnderlyingCUSIP" dest_col="UnderlyingCUSIP"/>
+			<column_mapping src_col="StrikePrice" dest_col="StrikePrice"/>
+			<column_mapping src_col="ExpireDate" dest_col="ExpireDate" user_defined_func="FormatDate" user_defined_func_param="ExpireDate"/>
+			<column_mapping src_col="ProcessDate" dest_col="ProcessDate" user_defined_func="FormatDate" user_defined_func_param="ProcessDate"/>
+
+		</subtable>
+		<default></default>
+	</table>
+
+	<table dest_file="EXT765.csv"  convert_func_script="trans_func" key = "AccountNumber">
+		<subtable src_file="EXT765.csv" main_table="true">
+			<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>
+			<column_mapping src_col="RecordTypeCode" dest_col="RecordTypeCode"/>
+			<column_mapping src_col="RecordTypeSubTypeCode" dest_col="RecordTypeSubTypeCode"/>
+			<column_mapping src_col="RRIndexCode" dest_col="RRIndexCode"/>
+			<column_mapping src_col="OfficeCode" dest_col="OfficeCode"/>
+			<column_mapping src_col="RegisteredRepCode" dest_col="RegisteredRepCode"/>
+			<column_mapping src_col="FederalIDIndicator" dest_col="FederalIDIndicator"/>
+			<column_mapping src_col="TaxIDNumber" dest_col="TaxIDNumber"/>
+			<column_mapping src_col="NameIndex" dest_col="NameIndex"/>
+			<column_mapping src_col="ShortName" dest_col="ShortName"/>
+			<column_mapping src_col="PartyIndex" dest_col="PartyIndex"/>
+			<column_mapping src_col="RelatedParty" dest_col="RelatedParty"/>
+			<column_mapping src_col="AccountName" dest_col="AccountName"/>
+			<column_mapping src_col="AddressLine1" dest_col="AddressLine1"/>
+			<column_mapping src_col="AddressLine2" dest_col="AddressLine2"/>
+			<column_mapping src_col="AddressLine3" dest_col="AddressLine3"/>
+			<column_mapping src_col="AddressLine4" dest_col="AddressLine4"/>
+			<column_mapping src_col="City" dest_col="City"/>
+			<column_mapping src_col="State" dest_col="State"/>
+			<column_mapping src_col="ZipCode" dest_col="ZipCode"/>
+			<column_mapping src_col="IRSControl" dest_col="IRSControl"/>
+			<column_mapping src_col="MultiRRS" dest_col="MultiRRS"/>
+			<column_mapping src_col="KND" dest_col="KND"/>
+			<column_mapping src_col="MapAccount" dest_col="MapAccount"/>
+			<column_mapping src_col="Fee" dest_col="Fee"/>
+			<column_mapping src_col="MMSweep" dest_col="MMSweep"/>
+			<column_mapping src_col="Del" dest_col="Del"/>
+			<column_mapping src_col="Pay" dest_col="Pay"/>
+			<column_mapping src_col="Div" dest_col="Div_"/>
+			<column_mapping src_col="Pri" dest_col="Pri"/>
+			<column_mapping src_col="ValCashPosition" dest_col="ValCashPosition"/>
+			<column_mapping src_col="AccountClass" dest_col="AccountClass"/>
+			<column_mapping src_col="AccountBalanceCategory" dest_col="AccountBalanceCategory"/>
+			<column_mapping src_col="PrintStatement" dest_col="PrintStatement"/>
+			<column_mapping src_col="FundPrincipal" dest_col="FundPrincipal"/>
+			<column_mapping src_col="FundInterest" dest_col="FundInterest"/>
+			<column_mapping src_col="Discretion" dest_col="Discretion"/>
+			<column_mapping src_col="PortfolioIndicator" dest_col="PortfolioIndicator"/>
+			<column_mapping src_col="IRA" dest_col="IRA"/>
+			<column_mapping src_col="CreditInterestSweep" dest_col="CreditInterestSweep"/>
+			<column_mapping src_col="MoneySweep" dest_col="MoneySweep"/>
+			<column_mapping src_col="OptionLevel" dest_col="OptionLevel"/>
+			<column_mapping src_col="Exposure" dest_col="Exposure"/>
+			<column_mapping src_col="NYTax" dest_col="NYTax"/>
+			<column_mapping src_col="StateTax" dest_col="StateTax"/>
+			<column_mapping src_col="IRSCode" dest_col="IRSCode"/>
+			<column_mapping src_col="FedTypeCode" dest_col="FedTypeCode"/>
+			<column_mapping src_col="NonObjecting" dest_col="NonObjecting"/>
+			<column_mapping src_col="IRSExempt" dest_col="IRSExempt"/>
+			<column_mapping src_col="ForeignCode" dest_col="ForeignCode"/>
+			<column_mapping src_col="Mature" dest_col="Mature"/>
+			<column_mapping src_col="FundFees" dest_col="FundFees"/>
+			<column_mapping src_col="OptionLimit" dest_col="OptionLimit"/>
+			<column_mapping src_col="ForwardLimit" dest_col="ForwardLimit"/>
+			<column_mapping src_col="SuppressConfirm" dest_col="SuppressConfirm"/>
+			<column_mapping src_col="RestrictReasonCode" dest_col="RestrictReasonCode"/>
+			<column_mapping src_col="CommissionSchedule" dest_col="CommissionSchedule"/>
+			<column_mapping src_col="W8" dest_col="W8"/>
+			<column_mapping src_col="FundDividend" dest_col="FundDividend"/>
+			<column_mapping src_col="FundMature" dest_col="FundMature"/>
+			<column_mapping src_col="Joint" dest_col="Joint"/>
+			<column_mapping src_col="Legal" dest_col="Legal"/>
+			<column_mapping src_col="Margin" dest_col="Margin"/>
+			<column_mapping src_col="OptionCode" dest_col="OptionCode"/>
+			<column_mapping src_col="CorpRes" dest_col="CorpRes"/>
+			<column_mapping src_col="Loan" dest_col="Loan"/>
+			<column_mapping src_col="NPLoan" dest_col="NPLoan"/>
+			<column_mapping src_col="Commodites" dest_col="Commodites"/>
+			<column_mapping src_col="PowerAttorney" dest_col="PowerAttorney"/>
+			<column_mapping src_col="IntFutures" dest_col="IntFutures"/>
+			<column_mapping src_col="CurFutures" dest_col="CurFutures"/>
+			<column_mapping src_col="SegCode" dest_col="SegCode"/>
+			<column_mapping src_col="PubEntity" dest_col="PubEntity"/>
+			<column_mapping src_col="TradeAuthorize" dest_col="TradeAuthorize"/>
+			<column_mapping src_col="TradeAccountAuthorize" dest_col="TradeAccountAuthorize"/>
+			<column_mapping src_col="ForwardDel" dest_col="ForwardDel"/>
+			<column_mapping src_col="Repo" dest_col="Repo"/>
+			<column_mapping src_col="Customer" dest_col="Customer"/>
+			<column_mapping src_col="RiskDisclose" dest_col="RiskDisclose"/>
+			<column_mapping src_col="NonCashDisclose" dest_col="NonCashDisclose"/>
+			<column_mapping src_col="HedgeLetter" dest_col="HedgeLetter"/>
+			<column_mapping src_col="Unsolicited" dest_col="Unsolicited"/>
+			<column_mapping src_col="Partnership" dest_col="Partnership"/>
+			<column_mapping src_col="SoleOwner" dest_col="SoleOwner"/>
+			<column_mapping src_col="FedFunds" dest_col="FedFunds"/>
+			<column_mapping src_col="SafeKeeping" dest_col="SafeKeeping"/>
+			<column_mapping src_col="ACH" dest_col="ACH"/>
+			<column_mapping src_col="MAS" dest_col="MAS"/>
+			<column_mapping src_col="DVP" dest_col="DVP"/>
+			<column_mapping src_col="DisclosureStatement" dest_col="DisclosureStatement"/>
+			<column_mapping src_col="Sweep" dest_col="Sweep"/>
+			<column_mapping src_col="FundRateClass" dest_col="FundRateClass"/>
+			<column_mapping src_col="SICCode" dest_col="SICCode"/>
+			<column_mapping src_col="UserCode1" dest_col="UserCode1"/>
+			<column_mapping src_col="UserCode2" dest_col="UserCode2"/>
+			<column_mapping src_col="UserCode3" dest_col="UserCode3"/>
+			<column_mapping src_col="UserCode4" dest_col="UserCode4"/>
+			<column_mapping src_col="UserCode5" dest_col="UserCode5"/>
+			<column_mapping src_col="UserCode6" dest_col="UserCode6"/>
+			<column_mapping src_col="Instituion" dest_col="Instituion"/>
+			<column_mapping src_col="AgentBank" dest_col="AgentBank"/>
+			<column_mapping src_col="CustomerAccount" dest_col="CustomerAccount"/>
+			<column_mapping src_col="ABANumber" dest_col="ABANumber"/>
+			<column_mapping src_col="AlternateAccountTypeA" dest_col="AlternateAccountTypeA"/>
+			<column_mapping src_col="ABANumberB" dest_col="ABANumberB"/>
+			<column_mapping src_col="AlternateAccountTypeB" dest_col="AlternateAccountTypeB"/>
+			<column_mapping src_col="TelcoExtension1" dest_col="TelcoExtension1"/>
+			<column_mapping src_col="TelcoExtension2" dest_col="TelcoExtension2"/>
+			<column_mapping src_col="RestrDate" dest_col="RestrDate" user_defined_func="FormatDate" user_defined_func_param="RestrDate"/>
+			<column_mapping src_col="OpenDDate" dest_col="OpenDDate" user_defined_func="FormatDate" user_defined_func_param="OpenDDate"/>
+			<column_mapping src_col="LastChangeDate" dest_col="LastChangeDate" user_defined_func="FormatDate" user_defined_func_param="LastChangeDate"/>
+			<column_mapping src_col="LastActivtyDate" dest_col="LastActivtyDate" user_defined_func="FormatDate" user_defined_func_param="LastActivtyDate"/>
+			<column_mapping src_col="LastTradeDate" dest_col="LastTradeDate" user_defined_func="FormatDate" user_defined_func_param="LastTradeDate" />
+			<column_mapping src_col="StockBorrowLoan" dest_col="StockBorrowLoan"/>
+			<column_mapping src_col="InventoryCarryType" dest_col="InventoryCarryType"/>
+			<column_mapping src_col="NumberID" dest_col="NumberID"/>
+			<column_mapping src_col="AddressIndicator" dest_col="AddressIndicator"/>
+			<column_mapping src_col="TelcoCode1" dest_col="TelcoCode1"/>
+			<column_mapping src_col="TelcoCode2" dest_col="TelcoCode2"/>
+			<column_mapping src_col="TelcoAreaCode1" dest_col="TelcoAreaCode1"/>
+			<column_mapping src_col="TelcoExchange1" dest_col="TelcoExchange1"/>
+			<column_mapping src_col="TelcoBase1" dest_col="TelcoBase1"/>
+			<column_mapping src_col="TelcoAreaCode2" dest_col="TelcoAreaCode2"/>
+			<column_mapping src_col="TelcoExchange2" dest_col="TelcoExchange2"/>
+			<column_mapping src_col="TelcoBase2" dest_col="TelcoBase2"/>
+			<column_mapping src_col="DayTradeCounter" dest_col="DayTradeCounter"/>
+			<column_mapping src_col="OldSystemAccountNumber" dest_col="OldSystemAccountNumber"/>
+			<column_mapping src_col="AlternateAccountB" dest_col="AlternateAccountB"/>
+			<column_mapping src_col="AlternateAccountA" dest_col="AlternateAccountA"/>
+			<column_mapping src_col="ClosedDate" dest_col="ClosedDate" user_defined_func="FormatDate" user_defined_func_param="ClosedDate"/>
+			<column_mapping src_col="PreEffAYY" dest_col="PreEffAYY" user_defined_func="FormatDate" user_defined_func_param="PreEffAYY"/>
+			<column_mapping src_col="PreEffBYY" dest_col="PreEffBYY" user_defined_func="FormatDate" user_defined_func_param="PreEffBYY"/>
+			<column_mapping src_col="TefraChangeYY" dest_col="TefraChangeYY" user_defined_func="FormatDate" user_defined_func_param="TefraChangeYY"/>
+			<column_mapping src_col="BankFailReport" dest_col="BankFailReport"/>
+			<column_mapping src_col="IssuerStatus" dest_col="IssuerStatus"/>
+			<column_mapping src_col="ARBCode" dest_col="ARBCode"/>
+			<column_mapping src_col="ProcessDate" dest_col="ProcessDate" user_defined_func="FormatDate" user_defined_func_param="ProcessDate"/>
+			<column_mapping src_col="AccountNature" dest_col="AccountNature"/>
+
+		</subtable>
+		<default></default>
+
+	</table>
+
+	<table dest_file="EXT869.csv"  convert_func_script="trans_func" key = "AccountNumber">
+		<subtable src_file="EXT869.csv" main_table="true">
+			<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>
+			<column_mapping src_col="AccountType" dest_col="AccountType"/>
+			<column_mapping src_col="Amount" dest_col="Amount"/>
+			<column_mapping src_col="Description" dest_col="Description"/>
+			<column_mapping src_col="CurrencyCode" dest_col="CurrencyCode"/>
+			<column_mapping src_col="ProcessDate" dest_col="ProcessDate" user_defined_func="FormatDate" user_defined_func_param="ProcessDate"/>
+			<column_mapping src_col="BatchCode" dest_col="BatchCode"/>
+			<column_mapping src_col="Cusip" dest_col="Cusip"/>
+			<column_mapping src_col="EntryDate" dest_col="EntryDate" user_defined_func="FormatDate" user_defined_func_param="EntryDate"/>
+			<column_mapping src_col="SourceProgram" dest_col="SourceProgram"/>
+			<column_mapping src_col="UserID" dest_col="UserID"/>
+			<column_mapping src_col="ActivityIndicator" dest_col="ActivityIndicator"/>
+			<column_mapping src_col="OfficeCode" dest_col="OfficeCode"/>
+			<column_mapping src_col="ACATSControlNumber" dest_col="ACATSControlNumber"/>
+			<column_mapping src_col="ActionCode" dest_col="ActionCode"/>
+			<column_mapping src_col="CheckNumber" dest_col="CheckNumber"/>
+			<column_mapping src_col="ContraAccountNumber" dest_col="ContraAccountNumber"/>
+			<column_mapping src_col="ContraAccountTypeCode" dest_col="ContraAccountTypeCode"/>
+			<column_mapping src_col="ContraCurrencyCode" dest_col="ContraCurrencyCode"/>
+			<column_mapping src_col="CorrWindowCode" dest_col="CorrWindowCode"/>
+			<column_mapping src_col="CurrentPaydownFactor" dest_col="CurrentPaydownFactor"/>
+			<column_mapping src_col="DivTaxTypeCode" dest_col="DivTaxTypeCode"/>
+			<column_mapping src_col="DTCNumber" dest_col="DTCNumber"/>
+			<column_mapping src_col="DTCNumberExp" dest_col="DTCNumberExp"/>
+			<column_mapping src_col="EffectiveDate" dest_col="EffectiveDate" user_defined_func="FormatDate" user_defined_func_param="EffectiveDate"/>
+			<column_mapping src_col="EnteredBy" dest_col="EnteredBy"/>
+			<column_mapping src_col="EntryTypeCode" dest_col="EntryTypeCode"/>
+			<column_mapping src_col="FeeIndicator" dest_col="FeeIndicator"/>
+			<column_mapping src_col="Firm" dest_col="Firm"/>
+			<column_mapping src_col="ForeignCode" dest_col="ForeignCode"/>
+			<column_mapping src_col="FundsUserCode" dest_col="FundsUserCode"/>
+			<column_mapping src_col="GLPostStatusCode" dest_col="GLPostStatusCode"/>
+			<column_mapping src_col="HistoryEntryCode" dest_col="HistoryEntryCode"/>
+			<column_mapping src_col="InterestEffectiveDate" dest_col="InterestEffectiveDate" user_defined_func="FormatDate" user_defined_func_param="InterestEffectiveDate" />
+			<column_mapping src_col="LastPaydownFactor" dest_col="LastPaydownFactor"/>
+			<column_mapping src_col="MDHIndicator" dest_col="MDHIndicator"/>
+			<column_mapping src_col="MergeEntryCode" dest_col="MergeEntryCode"/>
+			<column_mapping src_col="MAgentIndicator" dest_col="MAgentIndicator"/>
+			<column_mapping src_col="MoneyMarketCode" dest_col="MoneyMarketCode"/>
+			<column_mapping src_col="MutualFundPostIndicator" dest_col="MutualFundPostIndicator"/>
+			<column_mapping src_col="OriginalQuantity" dest_col="OriginalQuantity"/>
+			<column_mapping src_col="OverrideIndicator" dest_col="OverrideIndicator"/>
+			<column_mapping src_col="PasMergeEntryCode" dest_col="PasMergeEntryCode"/>
+			<column_mapping src_col="PayTypeCode" dest_col="PayTypeCode"/>
+			<column_mapping src_col="Price" dest_col="Price" user_defined_func="DefaultNumber" user_defined_func_param="Price" />
+			<column_mapping src_col="RecTypeCode" dest_col="RecTypeCode"/>
+			<column_mapping src_col="RegisteredRepCode" dest_col="RegisteredRepCode"/>
+			<column_mapping src_col="RRCategoryCode" dest_col="RRCategoryCode"/>
+			<column_mapping src_col="SequenceNumber" dest_col="SequenceNumber"/>
+			<column_mapping src_col="SMAChangeAmount" dest_col="SMAChangeAmount"/>
+			<column_mapping src_col="StatementIndicator" dest_col="StatementIndicator"/>
+			<column_mapping src_col="StatusCode" dest_col="StatusCode"/>
+			<column_mapping src_col="TaxOverrideCode" dest_col="TaxOverrideCode"/>
+			<column_mapping src_col="TaxYear" dest_col="TaxYear"/>
+			<column_mapping src_col="TerminalID" dest_col="TerminalID"/>
+			<column_mapping src_col="ThirdPartyCode" dest_col="ThirdPartyCode"/>
+			<column_mapping src_col="TradeDate" dest_col="TradeDate" user_defined_func="FormatDate" user_defined_func_param="TradeDate" />
+			<column_mapping src_col="Tradenumber" dest_col="Tradenumber"/>
+			<column_mapping src_col="UserEntryDate" dest_col="UserEntryDate" user_defined_func="FormatDate" user_defined_func_param="UserEntryDate" />
+			<column_mapping src_col="WireFundsCode" dest_col="WireFundsCode"/>
+			<column_mapping src_col="WithholdTaxIndicator" dest_col="WithholdTaxIndicator"/>
+			<column_mapping src_col="WithholdTaxTypeCode" dest_col="WithholdTaxTypeCode"/>
+			<column_mapping src_col="CorrespondentOfficeID" dest_col="CorrespondentOfficeID"/>
+			<column_mapping src_col="CorrespondentID" dest_col="CorrespondentID"/>
+		</subtable>
+		<default></default>
+	</table>
+
+	<!--<table dest_file="EXT870.csv"  convert_func_script="trans_func" key = "AccountNumber">-->
+		<!--<subtable src_file="EXT870.csv" main_table="true">-->
+			<!--<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>-->
+			<!--<column_mapping src_col="CurrencyCode" dest_col="CurrencyCode"/>-->
+			<!--<column_mapping src_col="AccountType" dest_col="AccountType"/>-->
+			<!--<column_mapping src_col="EntryDate" dest_col="EntryDate" user_defined_func="FormatDate" user_defined_func_param="EntryDate"/>-->
+			<!--<column_mapping src_col="Cusip" dest_col="Cusip"/>-->
+			<!--<column_mapping src_col="SequenceNumber" dest_col="SequenceNumber"/>-->
+			<!--<column_mapping src_col="LocLocation" dest_col="LocLocation"/>-->
+			<!--<column_mapping src_col="LocMemo" dest_col="LocMemo"/>-->
+			<!--<column_mapping src_col="TradeDate" dest_col="TradeDate" user_defined_func="FormatDate" user_defined_func_param="TradeDate"/>-->
+			<!--<column_mapping src_col="Tradenumber" dest_col="Tradenumber"/>-->
+			<!--<column_mapping src_col="SettleDate" dest_col="SettleDate" user_defined_func="FormatDate" user_defined_func_param="SettleDate"/>-->
+			<!--<column_mapping src_col="TradeSettleBasis" dest_col="TradeSettleBasis"/>-->
+			<!--<column_mapping src_col="Trailer" dest_col="Trailer"/>-->
+			<!--<column_mapping src_col="Quantity" dest_col="Quantity"/>-->
+			<!--<column_mapping src_col="SecurityTypeCode" dest_col="SecurityTypeCode"/>-->
+			<!--<column_mapping src_col="CertificateNumber" dest_col="CertificateNumber"/>-->
+			<!--<column_mapping src_col="LocationFrom1" dest_col="LocationFrom1"/>-->
+			<!--<column_mapping src_col="LocationFrom2" dest_col="LocationFrom2"/>-->
+			<!--<column_mapping src_col="LocationTo1" dest_col="LocationTo1"/>-->
+			<!--<column_mapping src_col="LocationTo2" dest_col="LocationTo2"/>-->
+			<!--<column_mapping src_col="CertificateHeld" dest_col="CertificateHeld"/>-->
+			<!--<column_mapping src_col="EnteredDate" dest_col="EnteredDate" user_defined_func="FormatDate" user_defined_func_param="EnteredDate"/>-->
+			<!--<column_mapping src_col="SourceProgram" dest_col="SourceProgram"/>-->
+			<!--<column_mapping src_col="StatementIndicator" dest_col="StatementIndicator"/>-->
+			<!--<column_mapping src_col="ActivityIndicator" dest_col="ActivityIndicator"/>-->
+			<!--<column_mapping src_col="CorrSeg" dest_col="CorrSeg"/>-->
+			<!--<column_mapping src_col="Override" dest_col="Override"/>-->
+			<!--<column_mapping src_col="PDOverride" dest_col="PDOverride"/>-->
+			<!--<column_mapping src_col="MLPAdjustment" dest_col="MLPAdjustment"/>-->
+			<!--<column_mapping src_col="IRAIgnore" dest_col="IRAIgnore"/>-->
+			<!--<column_mapping src_col="MergeEntryCode" dest_col="MergeEntryCode"/>-->
+			<!--<column_mapping src_col="HistoryEntryCode" dest_col="HistoryEntryCode"/>-->
+			<!--<column_mapping src_col="EntryType" dest_col="EntryType"/>-->
+			<!--<column_mapping src_col="TerminalID" dest_col="TerminalID"/>-->
+			<!--<column_mapping src_col="UserID" dest_col="UserID"/>-->
+			<!--<column_mapping src_col="SegIndicator" dest_col="SegIndicator"/>-->
+			<!--<column_mapping src_col="IssueDate" dest_col="IssueDate" user_defined_func="FormatDate" user_defined_func_param="IssueDate"/>-->
+			<!--<column_mapping src_col="CertificateShortDesc" dest_col="CertificateShortDesc"/>-->
+			<!--<column_mapping src_col="SMAChangeAmount" dest_col="SMAChangeAmount"/>-->
+			<!--<column_mapping src_col="SMAChangePrice" dest_col="SMAChangePrice"/>-->
+			<!--<column_mapping src_col="SMAChangeRate" dest_col="SMAChangeRate"/>-->
+			<!--<column_mapping src_col="ContraAccountNumber" dest_col="ContraAccountNumber"/>-->
+			<!--<column_mapping src_col="ContraCurrencyCode" dest_col="ContraCurrencyCode"/>-->
+			<!--<column_mapping src_col="ContraAccountTypeCode" dest_col="ContraAccountTypeCode"/>-->
+			<!--<column_mapping src_col="ReInvestmentAmount" dest_col="ReInvestmentAmount"/>-->
+			<!--<column_mapping src_col="ReInvestmentPrice" dest_col="ReInvestmentPrice"/>-->
+			<!--<column_mapping src_col="DTCNumberExp" dest_col="DTCNumberExp"/>-->
+			<!--<column_mapping src_col="DTCNumber" dest_col="DTCNumber"/>-->
+			<!--<column_mapping src_col="SequenceCusipNumber" dest_col="SequenceCusipNumber"/>-->
+			<!--<column_mapping src_col="SequenceEntryDate" dest_col="SequenceEntryDate" user_defined_func="FormatDate" user_defined_func_param="SequenceEntryDate"/>-->
+			<!--<column_mapping src_col="ProcessDate" dest_col="ProcessDate" user_defined_func="FormatDate" user_defined_func_param="ProcessDate"/>-->
+		<!--</subtable>-->
+		<!--<default></default>-->
+	<!--</table>-->
+
+	<table dest_file="EXT871.csv"  convert_func_script="trans_func" key = "AccountNumber">
+		<subtable src_file="EXT871.csv" main_table="true">
+			<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>
+			<column_mapping src_col="AccountNumber" dest_col="Serial_No" user_defined_func="GetSerialNo" user_defined_func_param="AccountNumber"/>
+			<column_mapping src_col="ProcessDate" dest_col="ProcessDate" user_defined_func="FormatDate" user_defined_func_param="ProcessDate"/>
+			<column_mapping src_col="Firm" dest_col="Firm"/>
+			<column_mapping src_col="CorrespondentID" dest_col="CorrespondentID"/>
+			<column_mapping src_col="CorrespondentOfficeID" dest_col="CorrespondentOfficeID"/>
+			<column_mapping src_col="OfficeCode" dest_col="OfficeCode"/>
+			<column_mapping src_col="RegisteredRepCode" dest_col="RegisteredRepCode"/>
+			<column_mapping src_col="AccountType" dest_col="AccountType"/>
+			<column_mapping src_col="Symbol" dest_col="Symbol"/>
+			<column_mapping src_col="CUSIP" dest_col="CUSIP"/>
+			<column_mapping src_col="TradeQuantity" dest_col="TradeQuantity"/>
+			<column_mapping src_col="SettleQuantity" dest_col="SettleQuantity"/>
+			<column_mapping src_col="CurrencyCode" dest_col="CurrencyCode"/>
+			<column_mapping src_col="SecurityTypeCode" dest_col="SecurityTypeCode"/>
+			<column_mapping src_col="Description" dest_col="Description"/>
+			<column_mapping src_col="MarginEligibleCode" dest_col="MarginEligibleCode"/>
+			<column_mapping src_col="ClosingPrice" dest_col="ClosingPrice"/>
+			<column_mapping src_col="LastActivtyDate" dest_col="LastActivtyDate" user_defined_func="FormatDate" user_defined_func_param="LastActivtyDate"/>
+			<column_mapping src_col="LocLocation" dest_col="LocLocation"/>
+			<column_mapping src_col="LocMemo" dest_col="LocMemo"/>
+			<column_mapping src_col="OptionAmount" dest_col="OptionAmount"/>
+			<column_mapping src_col="ConversionFactor" dest_col="ConversionFactor"/>
+			<column_mapping src_col="UnderlyingCusip" dest_col="UnderlyingCusip"/>
+			<column_mapping src_col="OptionSymbolRoot" dest_col="OptionSymbolRoot"/>
+			<column_mapping src_col="OptionContractDate" dest_col="OptionContractDate" user_defined_func="FormatDate" user_defined_func_param="OptionContractDate"/>
+			<column_mapping src_col="StrikePrice" dest_col="StrikePrice"/>
+			<column_mapping src_col="CallPut" dest_col="CallPut"/>
+			<column_mapping src_col="ExpirationDeliveryDate" dest_col="ExpirationDeliveryDate" user_defined_func="FormatDate" user_defined_func_param="ExpirationDeliveryDate"/>
+
+		</subtable>
+		<default></default>
+	</table>
+
+	<table dest_file="EXT872.csv"  convert_func_script="trans_func" key = "AccountNumber">
+		<subtable src_file="EXT872.csv" main_table="true">
+			<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>
+			<column_mapping src_col="ProcessDate" dest_col="ProcessDate" user_defined_func="FormatDate" user_defined_func_param="ProcessDate"/>
+			<column_mapping src_col="Firm" dest_col="Firm"/>
+			<column_mapping src_col="CorrespondentID" dest_col="CorrespondentID"/>
+			<column_mapping src_col="CorrespondentOfficeID" dest_col="CorrespondentOfficeID"/>
+			<column_mapping src_col="CorrespondentCode" dest_col="CorrespondentCode"/>
+			<column_mapping src_col="OficeCode" dest_col="OficeCode"/>
+			<column_mapping src_col="RegisteredRepCode" dest_col="RegisteredRepCode"/>
+			<column_mapping src_col="AccountType" dest_col="AccountType"/>
+			<column_mapping src_col="BuySellCode" dest_col="BuySellCode"/>
+			<column_mapping src_col="TradeDate" dest_col="TradeDate" user_defined_func="FormatDate" user_defined_func_param="TradeDate"/>
+			<column_mapping src_col="TradeNumber" dest_col="TradeNumber"/>
+			<column_mapping src_col="ExecutionTime" dest_col="ExecutionTime"/>
+			<column_mapping src_col="Cusip" dest_col="Cusip"/>
+			<column_mapping src_col="Symbol" dest_col="Symbol"/>
+			<column_mapping src_col="Quantity" dest_col="Quantity"/>
+			<column_mapping src_col="Price" dest_col="Price"/>
+			<column_mapping src_col="MarketCode" dest_col="MarketCode"/>
+			<column_mapping src_col="CapacityCode" dest_col="CapacityCode"/>
+			<column_mapping src_col="CommissionGrossCalculated" dest_col="CommissionGrossCalculated"/>
+			<column_mapping src_col="CommissionGrossEntered" dest_col="CommissionGrossEntered"/>
+			<column_mapping src_col="SettlementDate" dest_col="SettlementDate" user_defined_func="FormatDate" user_defined_func_param="SettlementDate"/>
+			<column_mapping src_col="CurrencyCode" dest_col="CurrencyCode"/>
+			<column_mapping src_col="PrincipalAmount" dest_col="PrincipalAmount"/>
+			<column_mapping src_col="NetAmount" dest_col="NetAmount"/>
+			<column_mapping src_col="FeeSec" dest_col="FeeSec"/>
+			<column_mapping src_col="FeeMisc" dest_col="FeeMisc"/>
+			<column_mapping src_col="Fee1" dest_col="Fee1"/>
+			<column_mapping src_col="Fee2" dest_col="Fee2"/>
+			<column_mapping src_col="Fee3" dest_col="Fee3"/>
+			<column_mapping src_col="Fee4" dest_col="Fee4"/>
+			<column_mapping src_col="Fee5" dest_col="Fee5"/>
+			<column_mapping src_col="EntryDate" dest_col="EntryDate" user_defined_func="FormatDate" user_defined_func_param="EntryDate"/>
+			<column_mapping src_col="ShortDescription" dest_col="ShortDescription"/>
+			<column_mapping src_col="TrailerCode" dest_col="TrailerCode"/>
+			<column_mapping src_col="TradeIntrest" dest_col="TradeIntrest"/>
+			<column_mapping src_col="ExecutingBrokerBack" dest_col="ExecutingBrokerBack"/>
+			<column_mapping src_col="SecurityTypeCode" dest_col="SecurityTypeCode"/>
+			<column_mapping src_col="CommissionRRCategory" dest_col="CommissionRRCategory"/>
+			<column_mapping src_col="Reallowance" dest_col="Reallowance"/>
+			<column_mapping src_col="CommissionEntered" dest_col="CommissionEntered"/>
+			<column_mapping src_col="ShortName" dest_col="ShortName"/>
+			<column_mapping src_col="Factor" dest_col="Factor"/>
+			<column_mapping src_col="CommissionNet" dest_col="CommissionNet"/>
+			<column_mapping src_col="Trailer" dest_col="Trailer"/>
+			<column_mapping src_col="ExecutingBrokerFront" dest_col="ExecutingBrokerFront"/>
+			<column_mapping src_col="FeeMF" dest_col="FeeMF"/>
+			<column_mapping src_col="ClearingSymbol" dest_col="ClearingSymbol"/>
+			<column_mapping src_col="Repo" dest_col="Repo"/>
+			<column_mapping src_col="Description1" dest_col="Description1"/>
+			<column_mapping src_col="SecuritySubType" dest_col="SecuritySubType"/>
+			<column_mapping src_col="InstructionsTradeLegendCode" dest_col="InstructionsTradeLegendCode"/>
+			<column_mapping src_col="Country" dest_col="Country"/>
+			<column_mapping src_col="ISIN" dest_col="ISIN"/>
+			<column_mapping src_col="LanguageID" dest_col="LanguageID"/>
+			<column_mapping src_col="InstructionsSpecial1" dest_col="InstructionsSpecial1"/>
+			<column_mapping src_col="InstructionsSpecial2" dest_col="InstructionsSpecial2"/>
+			<column_mapping src_col="OriginalTradeNumber" dest_col="OriginalTradeNumber"/>
+			<column_mapping src_col="TradeLegendCode" dest_col="TradeLegendCode"/>
+			<column_mapping src_col="OptionSymbolRoot" dest_col="OptionSymbolRoot"/>
+			<column_mapping src_col="DisplaySymbol" dest_col="DisplaySymbol"/>
+			<column_mapping src_col="StrikePrice" dest_col="StrikePrice"/>
+			<column_mapping src_col="CallPut" dest_col="CallPut"/>
+			<column_mapping src_col="ExpirationDeliveryDate" dest_col="ExpirationDeliveryDate" user_defined_func="FormatDate" user_defined_func_param="ExpirationDeliveryDate"/>
+			<column_mapping src_col="OptionContractDate" dest_col="OptionContractDate" user_defined_func="FormatDate" user_defined_func_param="OptionContractDate"/>
+		</subtable>
+		<default></default>
+	</table>
+
+	<table dest_file="EXT901.csv"  convert_func_script="trans_func" key = "AccountNumber">
+		<subtable src_file="EXT901.csv" main_table="true">
+			<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>
+			<column_mapping src_col="AccountNumber" dest_col="Serial_No" user_defined_func="GetSerialNo" user_defined_func_param="AccountNumber"/>
+			<column_mapping src_col="CorrespondentOfficeID" dest_col="CorrespondentOfficeID"/>
+			<column_mapping src_col="OfficeCode" dest_col="OfficeCode"/>
+			<column_mapping src_col="AccountType" dest_col="AccountType"/>
+			<column_mapping src_col="CurrencyCode" dest_col="CurrencyCode"/>
+			<column_mapping src_col="CurrencyCodeOffice" dest_col="CurrencyCodeOffice"/>
+			<column_mapping src_col="MoneyMarketCode" dest_col="MoneyMarketCode"/>
+			<column_mapping src_col="ProcessDate" dest_col="ProcessDate" user_defined_func="FormatDate" user_defined_func_param="ProcessDate"/>
+			<column_mapping src_col="Firm" dest_col="Firm"/>
+			<column_mapping src_col="BeginBalance" dest_col="BeginBalance" user_defined_func="DefaultBalance" user_defined_func_param="BeginBalance"/>
+			<column_mapping src_col="PriorBeginBalance" dest_col="PriorBeginBalance" user_defined_func="DefaultBalance" user_defined_func_param="PriorBeginBalance"/>
+			<column_mapping src_col="TradeBalance" dest_col="TradeBalance" user_defined_func="DefaultBalance" user_defined_func_param="TradeBalance"/>
+			<column_mapping src_col="TradeBalanceOffice" dest_col="TradeBalanceOffice"/>
+			<column_mapping src_col="TradeBalanceCorrespondent" dest_col="TradeBalanceCorrespondent"/>
+			<column_mapping src_col="TradeBalanceFirm" dest_col="TradeBalanceFirm"/>
+			<column_mapping src_col="SettleBalance" dest_col="SettleBalance" user_defined_func="DefaultBalance" user_defined_func_param="SettleBalance"/>
+			<column_mapping src_col="MarketBalance" dest_col="MarketBalance" user_defined_func="DefaultBalance" user_defined_func_param="MarketBalance"/>
+			<column_mapping src_col="TodayOpeningBalance" dest_col="TodayOpeningBalance" user_defined_func="DefaultBalance" user_defined_func_param="TodayOpeningBalance"/>
+			<column_mapping src_col="TodayCustOpenTDBalance" dest_col="TodayCustOpenTDBalance" user_defined_func="DefaultBalance" user_defined_func_param="TodayCustOpenTDBalance"/>
+			<column_mapping src_col="DividendCheckBalance" dest_col="DividendCheckBalance" user_defined_func="DefaultBalance" user_defined_func_param="DividendCheckBalance"/>
+			<column_mapping src_col="ActivityIndicator" dest_col="ActivityIndicator"/>
+			<column_mapping src_col="LastActiveDate" dest_col="LastActiveDate" user_defined_func="FormatDate" user_defined_func_param="LastActiveDate"/>
+			<column_mapping src_col="FreeBalance" dest_col="FreeBalance" user_defined_func="DefaultBalance" user_defined_func_param="FreeBalance"/>
+			<column_mapping src_col="TradeCashBalance" dest_col="TradeCashBalance" user_defined_func="DefaultBalance" user_defined_func_param="TradeCashBalance"/>
+			<column_mapping src_col="ShortTradeBalance" dest_col="ShortTradeBalance" user_defined_func="DefaultBalance" user_defined_func_param="ShortTradeBalance"/>
+			<column_mapping src_col="ShortOptionReq" dest_col="ShortOptionReq"/>
+			<column_mapping src_col="PendingDividendRec" dest_col="PendingDividendRec"/>
+		</subtable>
+		<default></default>
+	</table>
+
+
+	<table dest_file="EXT902.csv"  convert_func_script="trans_func" key = "CUSIP">
+		<subtable src_file="EXT902.csv" main_table="true">
+			<column_mapping src_col="Symbol" dest_col="Symbol"/>
+			<column_mapping src_col="MaintenanceLong" dest_col="MaintenanceLong"/>
+			<column_mapping src_col="MaintenanceShort" dest_col="MaintenanceShort"/>
+			<column_mapping src_col="InitialLong" dest_col="InitialLong"/>
+			<column_mapping src_col="InitialShort" dest_col="InitialShort"/>
+			<column_mapping src_col="DayTradeRequirementLong" dest_col="DayTradeRequirementLong"/>
+			<column_mapping src_col="DayTradeRequirementShort" dest_col="DayTradeRequirementShort"/>
+			<column_mapping src_col="UnderlierLessOOMPercent" dest_col="UnderlierLessOOMPercent"/>
+			<column_mapping src_col="UnderlierPercent" dest_col="UnderlierPercent"/>
+			<column_mapping src_col="UncoveredOptionMin" dest_col="UncoveredOptionMin"/>
+			<column_mapping src_col="Qualifier" dest_col="Qualifier"/>
+			<column_mapping src_col="Value" dest_col="Value"/>
+			<column_mapping src_col="DateModified" dest_col="DateModified" user_defined_func="FormatDate" user_defined_func_param="DateModified"/>
+		</subtable>
+		<default></default>
+	</table>
+
+
+
+	<!--<table dest_file="EXT922.csv"  convert_func_script="trans_func" key = "CUSIP">-->
+		<!--<subtable src_file="EXT922.csv" main_table="true">-->
+			<!--<column_mapping src_col="ReportDate" dest_col="ReportDate" user_defined_func="FormatDate" user_defined_func_param="ReportDate" />-->
+			<!--<column_mapping src_col="ReportNumber" dest_col="ReportNumber"/>-->
+			<!--<column_mapping src_col="ReportName" dest_col="ReportName"/>-->
+			<!--<column_mapping src_col="Symbol" dest_col="Symbol"/>-->
+			<!--<column_mapping src_col="CUSIP" dest_col="CUSIP"/>-->
+			<!--<column_mapping src_col="Description1" dest_col="Description1"/>-->
+			<!--<column_mapping src_col="Description2" dest_col="Description2"/>-->
+			<!--<column_mapping src_col="Description3" dest_col="Description3"/>-->
+			<!--<column_mapping src_col="SecurityTypeCode" dest_col="SecurityTypeCode"/>-->
+			<!--<column_mapping src_col="CurrencyCode" dest_col="CurrencyCode"/>-->
+			<!--<column_mapping src_col="ExchangeDate" dest_col="ExchangeDate" user_defined_func="FormatDate" user_defined_func_param="ExchangeDate"/>-->
+			<!--<column_mapping src_col="RecordDate" dest_col="RecordDate" user_defined_func="FormatDate" user_defined_func_param="RecordDate"/>-->
+			<!--<column_mapping src_col="PayDate" dest_col="PayDate" user_defined_func="FormatDate" user_defined_func_param="PayDate"/>-->
+			<!--<column_mapping src_col="DividendRate" dest_col="DividendRate"/>-->
+			<!--<column_mapping src_col="MaturityDate" dest_col="MaturityDate" user_defined_func="FormatDate" user_defined_func_param="MaturityDate"/>-->
+			<!--<column_mapping src_col="CouponDate" dest_col="CouponDate" user_defined_func="FormatDate" user_defined_func_param="CouponDate"/>-->
+			<!--<column_mapping src_col="FirstCouponDate" dest_col="FirstCouponDate" user_defined_func="FormatDate" user_defined_func_param="FirstCouponDate"/>-->
+			<!--<column_mapping src_col="CouponRate" dest_col="CouponRate"/>-->
+			<!--<column_mapping src_col="IssueDate" dest_col="IssueDate" user_defined_func="FormatDate" user_defined_func_param="IssueDate"/>-->
+			<!--<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>-->
+			<!--<column_mapping src_col="AccountType" dest_col="AccountType"/>-->
+			<!--<column_mapping src_col="AccountName" dest_col="AccountName"/>-->
+			<!--<column_mapping src_col="Location" dest_col="Location"/>-->
+			<!--<column_mapping src_col="Position" dest_col="Position"/>-->
+			<!--<column_mapping src_col="PositionQuantityLongOrShort" dest_col="PositionQuantityLongOrShort"/>-->
+			<!--<column_mapping src_col="DividendInterest" dest_col="DividendInterest"/>-->
+			<!--<column_mapping src_col="PayInstruction" dest_col="PayInstruction"/>-->
+			<!--<column_mapping src_col="WithHoldAmount" dest_col="WithHoldAmount"/>-->
+			<!--<column_mapping src_col="LastActivity" dest_col="LastActivity"/>-->
+			<!--<column_mapping src_col="LongTotalPayPosition" dest_col="LongTotalPayPosition"/>-->
+			<!--<column_mapping src_col="CreditTotalPayAmount" dest_col="CreditTotalPayAmount"/>-->
+			<!--<column_mapping src_col="ShortTotalPayPosition" dest_col="ShortTotalPayPosition"/>-->
+			<!--<column_mapping src_col="DebitTotalPayAmount" dest_col="DebitTotalPayAmount"/>-->
+			<!--<column_mapping src_col="Declared" dest_col="Declared"/>-->
+			<!--<column_mapping src_col="AccountStatus" dest_col="AccountStatus"/>-->
+			<!--<column_mapping src_col="RecordType" dest_col="RecordType"/>-->
+		<!--</subtable>-->
+		<!--<default></default>-->
+	<!--</table>-->
+
+
+
+	<table dest_file="EXT981.csv"  convert_func_script="trans_func" key = "AccountNumber">
+		<subtable src_file="EXT981.csv" main_table="true">
+			<column_mapping src_col="OvernightBuyingPowerID" dest_col="OvernightBuyingPowerID"/>
+			<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>
+			<column_mapping src_col="Firm" dest_col="Firm"/>
+			<column_mapping src_col="OfficeCode" dest_col="OfficeCode"/>
+			<column_mapping src_col="CorrespondentCode" dest_col="CorrespondentCode"/>
+			<column_mapping src_col="ProcessDate" dest_col="ProcessDate" user_defined_func="SplitTimeForDate" user_defined_func_param="ProcessDate"/>
+			<column_mapping src_col="ProcessDate" dest_col="ProcessTime" user_defined_func="SplitTimeForTime" user_defined_func_param="ProcessTime"/>
+			<column_mapping src_col="CurrencyCode" dest_col="CurrencyCode"/>
+			<column_mapping src_col="TotalEquity" dest_col="TotalEquity"/>
+			<column_mapping src_col="MarginEquity" dest_col="MarginEquity"/>
+			<column_mapping src_col="MarginRequirement" dest_col="MarginRequirement"/>
+			<column_mapping src_col="MarginExcessEquity" dest_col="MarginExcessEquity"/>
+			<column_mapping src_col="CashEquity" dest_col="CashEquity"/>
+			<column_mapping src_col="CashRequirement" dest_col="CashRequirement"/>
+			<column_mapping src_col="CashExcessEquity" dest_col="CashExcessEquity"/>
+			<column_mapping src_col="MarginRequirementWithConcentration" dest_col="MarginReqWithConcentration"/>
+			<column_mapping src_col="MarginExcessEquityWithConcentration" dest_col="MarginExcessEquityWithCon"/>
+			<column_mapping src_col="OvernightBuyingPowerCalculated" dest_col="OvernightBuyingPowerCalc"/>
+			<column_mapping src_col="OvernightBuyingPowerIssued" dest_col="OvernightBuyingPowerIssued"/>
+			<column_mapping src_col="DayTradeBuyingPowerIssued" dest_col="DayTradeBuyingPowerIssued"/>
+			<column_mapping src_col="RegTBuyingPowerCalculated" dest_col="RegTBuyingPowerCalculated"/>
+			<column_mapping src_col="RegTBuyingPowerIssued" dest_col="RegTBuyingPowerIssued"/>
+			<column_mapping src_col="OvernightFactorCalculated" dest_col="OvernightFactorCalculated"/>
+			<column_mapping src_col="OvernightFactorIssued" dest_col="OvernightFactorIssued"/>
+			<column_mapping src_col="DayTradeFactorCalculated" dest_col="DayTradeFactorCalculated"/>
+			<column_mapping src_col="DayTradeFactorIssued" dest_col="DayTradeFactorIssued"/>
+			<column_mapping src_col="MarginEquityPercent" dest_col="MarginEquityPercent"/>
+			<column_mapping src_col="PositionMarketValue" dest_col="PositionMarketValue"/>
+			<column_mapping src_col="LongEquityMarketValue" dest_col="LongEquityMarketValue"/>
+			<column_mapping src_col="ShortEquityMarketValue" dest_col="ShortEquityMarketValue"/>
+			<column_mapping src_col="LongOptionMarketValue" dest_col="LongOptionMarketValue"/>
+			<column_mapping src_col="ShortOptionMarketValue" dest_col="ShortOptionMarketValue"/>
+			<column_mapping src_col="TotalTradeBalance" dest_col="TotalTradeBalance"/>
+			<column_mapping src_col="TotalSettleBalance" dest_col="TotalSettleBalance"/>
+			<column_mapping src_col="CashTradeBalance" dest_col="CashTradeBalance"/>
+			<column_mapping src_col="MarginTradeBalance" dest_col="MarginTradeBalance"/>
+			<column_mapping src_col="ShortTradeBalance" dest_col="ShortTradeBalance"/>
+			<column_mapping src_col="MoneyMarketTradeBalance" dest_col="MoneyMarketTradeBalance"/>
+			<column_mapping src_col="CashSettleBalance" dest_col="CashSettleBalance"/>
+			<column_mapping src_col="MarginSettleBalance" dest_col="MarginSettleBalance"/>
+			<column_mapping src_col="ShortSettleBalance" dest_col="ShortSettleBalance"/>
+			<column_mapping src_col="MoneyMarketSettleBalance" dest_col="MoneyMarketSettleBalance"/>
+			<column_mapping src_col="FreeCash" dest_col="FreeCash"/>
+			<column_mapping src_col="SMA" dest_col="SMA"/>
+			<column_mapping src_col="AvailableToWithdraw" dest_col="AvailableToWithdraw"/>
+			<column_mapping src_col="FutureBalance" dest_col="FutureBalance"/>
+			<column_mapping src_col="FutureEquity" dest_col="FutureEquity"/>
+			<column_mapping src_col="FutureRequirement" dest_col="FutureRequirement"/>
+			<column_mapping src_col="OptionsRequirement" dest_col="OptionsRequirement"/>
+			<column_mapping src_col="NonOptionsRequirement" dest_col="NonOptionsRequirement"/>
+			<column_mapping src_col="LastUpdate" dest_col="LastUpdateDate" user_defined_func="SplitTimeForTime" user_defined_func_param="LastUpdateDate"/>
+			<column_mapping src_col="LastUpdate" dest_col="LastUpdateTime" user_defined_func="SplitTimeForTime" user_defined_func_param="LastUpdateTime"/>
+			<column_mapping src_col="NonOptionsRequirementNotConcentrated" dest_col="NonOptionsReqNotConcentrated"/>
+			<column_mapping src_col="TypeIUnavailableCashProceeds" dest_col="TypeIUnavailableCashProceeds"/>
+			<column_mapping src_col="TypeIIUnavailableCashProceeds" dest_col="TypeIIUnavailableCashProceeds"/>
+			<column_mapping src_col="NetBalance" dest_col="NetBalance"/>
+			<column_mapping src_col="SMACommitted" dest_col="SMACommitted"/>
+			<column_mapping src_col="HighWaterMark" dest_col="HighWaterMark"/>
+		</subtable>
+		<default></default>
+	</table>
+
+	<table dest_file="EXT982.csv"  convert_func_script="trans_func" key = "AccountNumber">
+		<subtable src_file="EXT982.csv" main_table="true">
+			<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>
+			<column_mapping src_col="AccountNumber" dest_col="Serial_No" user_defined_func="GetSerialNo" user_defined_func_param="AccountNumber"/>
+			<column_mapping src_col="Firm" dest_col="Firm"/>
+			<column_mapping src_col="OfficeCode" dest_col="OfficeCode"/>
+			<column_mapping src_col="StrategyId" dest_col="StrategyId"/>
+			<column_mapping src_col="StrategySequence" dest_col="StrategySequence"/>
+			<column_mapping src_col="AccountType" dest_col="AccountType"/>
+			<column_mapping src_col="CUSIP" dest_col="CUSIP"/>
+			<column_mapping src_col="TradeQuantity" dest_col="TradeQuantity"/>
+			<column_mapping src_col="Symbol" dest_col="Symbol"/>
+			<column_mapping src_col="Description" dest_col="Description"/>
+			<column_mapping src_col="ClosingPrice" dest_col="ClosingPrice"/>
+			<column_mapping src_col="MarketValue" dest_col="MarketValue"/>
+			<column_mapping src_col="SecurityTypeCode" dest_col="SecurityTypeCode"/>
+			<column_mapping src_col="UnderlyingSymbol" dest_col="UnderlyingSymbol"/>
+			<column_mapping src_col="StrikePrice" dest_col="StrikePrice"/>
+			<column_mapping src_col="ISIN" dest_col="ISIN"/>
+			<column_mapping src_col="Change" dest_col="Change_"/>
+			<column_mapping src_col="PositionType" dest_col="PositionType"/>
+			<column_mapping src_col="ProcessDate" dest_col="ProcessDate" user_defined_func="SplitTimeForDate" user_defined_func_param="ProcessDate"/>
+			<column_mapping src_col="ProcessDate" dest_col="ProcessTime" user_defined_func="SplitTimeForTime" user_defined_func_param="ProcessTime"/>
+			<column_mapping src_col="IsSelling" dest_col="IsSelling"/>
+			<column_mapping src_col="MaintenanceRequirement" dest_col="MaintenanceReq"/>
+			<column_mapping src_col="ConcentrationRequirement" dest_col="ConcentrationReq"/>
+			<column_mapping src_col="OptionStrategy" dest_col="OptionStrategy"/>
+			<column_mapping src_col="OptionLeg" dest_col="OptionLeg"/>
+			<column_mapping src_col="StrategyMaintenanceRequirement" dest_col="StrategyMaintenanceReq"/>
+			<column_mapping src_col="StrategyConcentrationRequirement" dest_col="StrategyConcentrationReq"/>
+		</subtable>
+		<default></default>
+	</table>
+
+
+
+	<!--<table dest_file="EXT989.csv"  convert_func_script="trans_func" key = "AccountNumber">-->
+		<!--<subtable src_file="EXT989.csv" main_table="true">-->
+			<!--<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>-->
+			<!--<column_mapping src_col="RegisteredRepCode" dest_col="RegisteredRepCode"/>-->
+			<!--<column_mapping src_col="StatementStatus" dest_col="StatementStatus"/>-->
+			<!--<column_mapping src_col="ConfirmStatus" dest_col="ConfirmStatus"/>-->
+			<!--<column_mapping src_col="ProspectusStatus" dest_col="ProspectusStatus"/>-->
+			<!--<column_mapping src_col="ProxyStatus" dest_col="ProxyStatus"/>-->
+			<!--<column_mapping src_col="TaxStatus" dest_col="TaxStatus"/>-->
+			<!--<column_mapping src_col="ClosedIndicator" dest_col="ClosedIndicator"/>-->
+			<!--<column_mapping src_col="ClosedReason" dest_col="ClosedReason"/>-->
+			<!--<column_mapping src_col="EmailAddress" dest_col="EmailAddress"/>-->
+			<!--<column_mapping src_col="LastUpdated" dest_col="LastUpdated" user_defined_func="FormatDate" user_defined_func_param="LastUpdated" />-->
+		<!--</subtable>-->
+		<!--<default></default>-->
+	<!--</table>-->
+
+	<table dest_file="EXT997.csv"  convert_func_script="trans_func" key = "AccountNumber">
+		<subtable src_file="EXT997.csv" main_table="true">
+			<column_mapping src_col="ProcessDate" dest_col="ProcessDate" user_defined_func="FormatDate" user_defined_func_param="ProcessDate" />
+			<column_mapping src_col="OfficeCode" dest_col="OfficeCode"/>
+			<column_mapping src_col="AccountNumber" dest_col="AccountNumber"/>
+			<column_mapping src_col="GrossFundsAvailable" dest_col="GrossFundsAvailable"/>
+			<column_mapping src_col="PendingTransfer" dest_col="PendingTransfer"/>
+			<column_mapping src_col="RecentDeposit" dest_col="RecentDeposit"/>
+			<column_mapping src_col="PendingDebitInterest" dest_col="PendingDebitInterest"/>
+			<column_mapping src_col="PendingDebitDividend" dest_col="PendingDebitDividend"/>
+			<column_mapping src_col="FullyPaidUnsettledBalance" dest_col="FullyPaidUnsettledBalance"/>
+			<column_mapping src_col="NetFundsAvailable" dest_col="NetFundsAvailable"/>
+			<column_mapping src_col="AmountWithheld" dest_col="AmountWithheld"/>
+		</subtable>
+		<default></default>
+	</table>
+
+
+
+
+
+
+</protocol>

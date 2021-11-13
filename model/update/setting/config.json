@@ -1,0 +1,30 @@
+{
+  "Base_URL": "http://172.19.81.78:9090",
+  "Dbparam": "system/myhexin@172.19.81.79:7070/orcloms",
+  "CountOneTime": 5,
+  "CronJob":
+  {
+    "Func": "UpdateJob",
+    "Hour": "4-22",
+    "Second": "*/30"
+  },
+  "CronJob_AfterTrade":
+   {
+    "Func": "UpdateJobAfter",
+    "Hour": "20",
+     "Minute": "1-30",
+    "Second": "*/30"
+  },
+  "CronJob_Resend":
+  {
+    "Func": "ResendTransaction",
+    "Hour":"21",
+    "Minute":"30"
+  },
+  "CronJob_Writeback":
+  {
+    "Func": "WritebackTransaction",
+    "Hour":"4-22",
+    "Second":"58"
+  }
+}

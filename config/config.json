@@ -1,0 +1,9 @@
+{
+	"env":"prod",
+	"base_url":"http://neway.10jqka.com.cn:9003/oms/",
+	"host":"10.0.1.103",
+	"port":"5000",
+	"order_file_path":"application/file/",
+	"log_level":"debug",
+	"retry_order_cnt":10
+}

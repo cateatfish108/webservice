@@ -1,0 +1,16 @@
+{
+    "Head": "AccountNumber,RegisteredRepCode,StatementStatus,ConfirmStatus,ProspectusStatus,ProxyStatus,TaxStatus,ClosedIndicator,ClosedReason,EmailAddress,LastUpdated",
+    "ChangeRules": {
+        "AccountNumber": "AccountNumber",
+        "RegisteredRepCode": "RegisteredRepCode",
+        "StatementStatus": "StatementStatus",
+        "ConfirmStatus": "ConfirmStatus",
+        "ProspectusStatus": "ProspectusStatus",
+        "ProxyStatus": "ProxyStatus",
+        "TaxStatus": "TaxStatus",
+        "ClosedIndicator ": "ClosedIndicator ",
+        "ClosedReason": "ClosedReason",
+        "EmailAddress": "EmailAddress",
+        "LastUpdated": "LastUpdated"
+    }
+}
