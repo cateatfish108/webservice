@@ -10,10 +10,10 @@
   {
     "SetDatabase":"mysql",
     "Oracle":{
-      "LinkParam":"system/myhexin@172.19.81.79:7070/orcloms"
+      "LinkParam":"system/test@172.19.81.79:7070/orcloms"
     },
     "MySQL":{
-      "Host":"172.19.81.78",
+      "Host":"127.0.0.1",
       "Port":8002,
       "User":"root",
       "Passwd":"OMS@10jqka",

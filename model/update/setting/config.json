@@ -1,6 +1,6 @@
 {
-  "Base_URL": "http://172.19.81.78:9090",
-  "Dbparam": "system/myhexin@172.19.81.79:7070/orcloms",
+  "Base_URL": "http://127.0.0.1:9090",
+  "Dbparam": "system/test@172.19.81.79:7070/orcloms",
   "CountOneTime": 5,
   "CronJob":
   {

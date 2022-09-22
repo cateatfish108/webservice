@@ -1,6 +1,6 @@
 {
 	"env":"dev",
-	"base_url":"http://172.19.81.78:8080/",
+	"base_url":"http://127.0.0.1:8080/",
 	"host":"10.10.36.183",
 	"port":"8002",
 	"order_file_path":"application/file/",

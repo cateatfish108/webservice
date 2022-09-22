@@ -6,7 +6,7 @@ class Config(object):
     """项目配置核心类"""
     # 调试模式
     DEBUG = True
-    # SQLALCHEMY_DATABASE_URI = 'oracle://quickbroker:myhexin@172.19.81.79:7070/Orcloms'
+    # SQLALCHEMY_DATABASE_URI = 'oracle://quickbroker:test@172.19.81.79:7070/Orcloms'
     # SQLALCHEMY_ECHO = True
     LOG_LEVEL = logging.DEBUG
     ORDER_LIST_FILE_PATH = 'application/file/'
@@ -15,7 +15,7 @@ class Config(object):
 
 class Dev_config(Config):
     DEBUG = True
-    # SQLALCHEMY_DATABASE_URI = 'oracle://quickbroker:myhexin@172.19.81.79:7070/Orcloms'
+    # SQLALCHEMY_DATABASE_URI = 'oracle://quickbroker:test@172.19.81.79:7070/Orcloms'
     # SQLALCHEMY_ECHO = True
     LOG_LEVEL = logging.DEBUG
     ORDER_LIST_FILE_PATH = 'application/file/'
@@ -26,7 +26,7 @@ class Product_config(Config):
     HOST = '10.0.1.103'
     PORT = 5000
     send_base_url = 'http://neway.10jqka.com.cn:9003/oms/'
-    #SQLALCHEMY_DATABASE_URI = 'oracle://quickbroker:myhexin@172.19.81.79:7070/Orcloms'
+    #SQLALCHEMY_DATABASE_URI = 'oracle://quickbroker:test@172.19.81.79:7070/Orcloms'
     LOG_LEVEL = logging.INFO
     ORDER_LIST_FILE_PATH = 'application/file/'
     RETRY_ORDER_RETURN_CNT = 10
